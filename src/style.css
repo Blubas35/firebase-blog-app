@@ -1,47 +1,7 @@
-$yellow: #f5bc04;
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
-
-@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
-  @if $inset {
-    -webkit-box-shadow: inset $top $left $blur $color;
-    -moz-box-shadow: inset $top $left $blur $color;
-    -o-box-shadow: inset $top $left $blur $color;
-    box-shadow: inset $top $left $blur $color;
-  } @else {
-    -webkit-box-shadow: $top $left $blur $color;
-    -moz-box-shadow: $top $left $blur $color;
-    -o-box-shadow: $top $left $blur $color;
-    box-shadow: $top $left $blur $color;
-  }
-}
-
-@mixin clip-path($clip) {
-  -webkit-clip-path: $clip;
-  -moz-clip-path: $clip;
-  -ms-clip-path: $clip;
-  clip-path: $clip;
-}
-
-@mixin transition($transition) {
-  -moz-transition: all $transition ease;
-  -o-transition: all $transition ease;
-  -webkit-transition: all $transition ease;
-  -ms-transition: all $transition ease;
-  transition: all $transition ease;
-}
-
 .paddding {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-
-// Header
 
 .navbar-light .navbar-nav .open > .nav-link,
 .navbar-light .navbar-nav .active > .nav-link,
@@ -53,10 +13,14 @@ $yellow: #f5bc04;
   padding-left: 20px !important;
   padding-right: 20px !important;
   margin: 0 20px !important;
-  @include transition(0.5s);
-  background: $yellow !important;
-  @include clip-path(polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0));
+  transition: all 0.5s ease;
+  background: #f5bc04 !important;
+  -webkit-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  -moz-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  -ms-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
 }
+
 .navbar-light .navbar-nav .nav-link {
   color: #222 !important;
   padding-top: 12px !important;
@@ -64,21 +28,22 @@ $yellow: #f5bc04;
   padding-left: 20px !important;
   padding-right: 20px !important;
   margin: 0 20px !important;
-  @include transition(0.5s);
+  transition: all 0.5s ease;
   position: relative !important;
-  @include clip-path(polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0));
-
-  &:focus,
-  &:hover {
-    background: $yellow !important;
-    color: #fff !important;
-    padding-top: 12px !important;
-    padding-bottom: 15px !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    margin: 0 20px;
-    position: relative;
-  }
+  -webkit-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  -moz-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  -ms-clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+  clip-path: polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0);
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  background: #f5bc04 !important;
+  color: #fff !important;
+  padding-top: 12px !important;
+  padding-bottom: 15px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  margin: 0 20px;
+  position: relative;
 }
 
 .bg-faded {
@@ -94,8 +59,6 @@ $yellow: #f5bc04;
   cursor: pointer;
 }
 
-// form
-
 .heading {
   font-size: 20px;
   color: #424040;
@@ -103,7 +66,7 @@ $yellow: #f5bc04;
 }
 
 .input-text-box {
-  @include border-radius(0!important);
+  border-radius: 0 !important;
   font-size: 15px !important;
   height: 45px !important;
   letter-spacing: 1px !important;
@@ -111,12 +74,12 @@ $yellow: #f5bc04;
 
 .form-control:focus {
   box-shadow: none !important;
-  border-color: $yellow !important;
+  border-color: #f5bc04 !important;
 }
 
 .btn-sign-in {
   background: #c43421 !important;
-  @include border-radius(0!important);
+  border-radius: 0 !important;
   color: #fff !important;
   padding: 10px 50px !important;
   border-radius: 5px !important;
@@ -124,18 +87,18 @@ $yellow: #f5bc04;
 
 .btn-sign-up {
   background: #4287f5 !important;
-  @include border-radius(0!important);
+  border-radius: 0 !important;
   color: #fff !important;
   padding: 10px 50px !important;
   border-radius: 5px !important;
 }
 
 .blog-form input:focus {
-  border-color: $yellow !important;
+  border-color: #f5bc04 !important;
 }
 
 .description-box {
-  @include border-radius(0!important);
+  border-radius: 0 !important;
   height: 150px;
   resize: none;
   padding-top: 20px !important;
@@ -144,7 +107,7 @@ $yellow: #f5bc04;
 
 .btn-add {
   background: #bf7034 !important;
-  @include border-radius(0!important);
+  border-radius: 0 !important;
   color: #fff !important;
   padding: 10px 50px !important;
 }
@@ -154,7 +117,7 @@ $yellow: #f5bc04;
 }
 
 .react-tag-input:focus {
-  border-color: $yellow !important;
+  border-color: #f5bc04 !important;
 }
 
 .catg-dropdown {
@@ -166,7 +129,7 @@ $yellow: #f5bc04;
 
 .catg-dropdown:focus {
   outline: none !important;
-  border-color: $yellow;
+  border-color: #f5bc04;
 }
 
 .trending {
@@ -174,4 +137,4 @@ $yellow: #f5bc04;
   color: #806a78;
   font-size: 18px;
   margin: auto;
-}
+}/*# sourceMappingURL=style.css.map */
