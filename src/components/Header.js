@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ active, setActive, user }) => {
+const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-light">
@@ -80,7 +80,12 @@ const Header = ({ active, setActive, user }) => {
                           {user?.displayName}
                         </p>
                       </li>
-                      <li className="nav-item nav-link text-center">Logout</li>
+                      <li
+                        className="nav-item nav-link text-center"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </li>
                     </>
                   ) : (
                     <li onClick={() => setActive("login")}>
