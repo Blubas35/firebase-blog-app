@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
-import { storage } from "../firebase";
+import { db, storage } from "../firebase";
+import { useNavigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const initialState = {
   title: "",
@@ -21,12 +23,14 @@ const categoryOption = [
   "Business",
 ];
 
-const AddEditBlog = () => {
+const AddEditBlog = ({ user }) => {
   const [form, setFrom] = useState(initialState);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(null);
 
   const { title, tags, category, trending, description } = form;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const uploadFile = () => {
@@ -38,7 +42,7 @@ const AddEditBlog = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("upload is " + progress + "% done")
+          console.log("upload is " + progress + "% done");
           setProgress(progress);
           switch (snapshot.state) {
             case "paused":
@@ -61,18 +65,42 @@ const AddEditBlog = () => {
       );
     };
 
-    file && uploadFile()
+    file && uploadFile();
   }, [file]);
 
   const handleChange = (e) => {
     setFrom({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleTags = () => {};
+  const handleTags = (tags) => {
+    setFrom({ ...form, tags });
+  };
 
-  const handleTrending = () => {};
+  const handleTrending = (e) => {
+    setFrom({ ...form, trending: e.target.value });
+  };
 
-  const onCategoryChange = () => {};
+  const onCategoryChange = (e) => {
+    setFrom({ ...form, category: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (category && tags && title && file && description && trending) {
+      try {
+        await addDoc(collection(db, "blogs"), {
+          ...form,
+          timestamp: serverTimestamp(),
+          author: user.displayName,
+          userId: user.uid,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    navigate("/");
+  };
 
   return (
     <div className="container-fluid mb-4">
@@ -82,7 +110,7 @@ const AddEditBlog = () => {
         </div>
         <div className="row h-100 justify-content-center align-items-center">
           <div className="col-10 col-md-8 col-lg-6">
-            <form className="row blog-form">
+            <form className="row blog-form" onSubmit={handleSubmit}>
               <div className="col-12 py-3">
                 <label htmlFor="title" className="visually-hidden">
                   Title
@@ -162,7 +190,11 @@ const AddEditBlog = () => {
                 />
               </div>
               <div className="col-12 py-3 text-center">
-                <button className="btn btn-add" type="submit" disabled={progress !== null && progress < 100}>
+                <button
+                  className="btn btn-add"
+                  type="submit"
+                  disabled={progress !== null && progress < 100}
+                >
                   Submit
                 </button>
               </div>
