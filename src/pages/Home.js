@@ -59,7 +59,7 @@ const Home = ({ setActive, user }) => {
       unsub();
       getTrendingBlogs();
     };
-  }, []);
+  }, [setActive]);
 
   if (loading) {
     return <Spinner />;

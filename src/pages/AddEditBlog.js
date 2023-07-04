@@ -44,6 +44,7 @@ const AddEditBlog = ({ setActive, user }) => {
 
   useEffect(() => {
     id && getBlogDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const getBlogDetail = async () => {
@@ -70,6 +71,7 @@ const AddEditBlog = ({ setActive, user }) => {
           switch (snapshot.state) {
             case "paused":
               console.log("Upload is paused");
+              break
             case "running":
               console.log("Upload is running");
               break;

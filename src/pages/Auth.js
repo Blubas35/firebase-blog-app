@@ -16,7 +16,7 @@ const initialState = {
   confirmPassword: "",
 };
 
-const Auth = ({ setActive }) => {
+const Auth = ({ setActive, setUser }) => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
 
@@ -39,6 +39,7 @@ const Auth = ({ setActive }) => {
           password
         );
         setActive("home");
+        setUser(user);
       } else {
         return toast.error("All fields are mandatory");
       }
